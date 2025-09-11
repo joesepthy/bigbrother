@@ -69,7 +69,7 @@ Jira, Trello, GitHub Projects 등을 활용한 일정 및 작업 관리
 ```
 
 ## 구성원
-
+![Image](https://github.com/user-attachments/assets/8d8920e4-aa4b-4c25-9046-c3aa9a5f6cf7)
 - 팀장 : 이효찬
 - 팀원 : 구슬기, 김예정, 한믿음, 김지수, 황재영, 전강호
 
