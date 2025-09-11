@@ -28,7 +28,7 @@ def infer(img, **kwargs):
 # streamlink로 최적 스트림 URL 얻기
 def get_stream_url(youtube_url):
     cmd = [
-        r"C:\Users\Administrator\anaconda3\envs\py39\Scripts\streamlink.exe",
+        "streamlink.exe",
         "--stream-url",
         youtube_url,
         "best"
@@ -52,8 +52,8 @@ zone_detections = {1: 0, 2: 0, 3: 0, 4: 0}
 detection_lock = threading.Lock()
 
 # --- 경보 임계값 ---
-WARNING_THRESHOLD = 20
-DANGER_THRESHOLD = 25
+WARNING_THRESHOLD = 60
+DANGER_THRESHOLD = 70
 
 def generate_frames(camera_id):
     while True:
