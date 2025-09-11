@@ -80,7 +80,7 @@
 
 ## 환경 설치
 ```
-
+pip install -r requirements.txt
 ```
 
 ## 실행
