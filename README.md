@@ -43,9 +43,8 @@ Jira, Trello, GitHub Projects 등을 활용한 일정 및 작업 관리
 
 ## 프로젝트 일정 수립
 ```
-1. 프로젝트 기간: 2025.09.03 ~ 2025.09.12
-2. 프로젝트 명: 관심영역 기반 위험 예측 관제 시스템 개발
-3. 프로젝트 주제: 인파밀집 경고 시스템
+프로젝트 기간: 2025.09.03 ~ 2025.09.12
+
 ```
 
 ## 기술 스텍 & 협업 환경
@@ -70,6 +69,41 @@ Jira, Trello, GitHub Projects 등을 활용한 일정 및 작업 관리
 ```
 팀장 : 이효찬
 팀원 : 구슬기, 김예정, 한믿음, 김지수, 황재영, 전강호
+```
+
+## 설명
+```
+프로젝트 명: 관심영역 기반 위험 예측 관제 시스템 개발
+프로젝트 주제: 인파밀집 경고 시스템
+```
+
+## 환경 셋팅
+```
+
+```
+
+## 환경 설치
+```
+
+```
+
+## 실행
+```
+cd Python_Project
+python app_tensorrt_live.py
+```
+
+## 영상 접근
+1. [youtube](https://www.youtube.com/live/rnXIjl_Rzy4?si=lRcDqlANkukTPBAx)
+   
+### 접근 방법
+```
+youtube 영상 접근 => 공유 => 링크 복사 => subprocess로 링크 변환 => cv2.CaptureVideo() 적용 => 영상 스트리밍
+```
+
+### 예시 링크
+```
+youtube_live_url = "https://www.youtube.com/live/rnXIjl_Rzy4?si=lRcDqlANkukTPBAx"
 ```
 
 ```mermaid
