@@ -35,9 +35,8 @@ Jira, Trello, GitHub Projects 등을 활용한 일정 및 작업 관리
 추가 개선 작업 진행 여부 결정
 
 ## 타임 테이블
-```
 [타임테이블](https://www.notion.so/2683c414e0cc802f80ebcb913700dbee?v=2683c414e0cc802da810000c5abdc096&source)
-```
+
 ## 타임 테이블
 | 날짜 | 내용 |
 |--|--|
