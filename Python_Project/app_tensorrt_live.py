@@ -20,7 +20,7 @@ zone_coords = {
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(f"🔍 Using device: {device}")
 DEVICE_ARG = 0 if device == 'cuda' else 'cpu'
-model = RTDETR("C:/Users/Administrator/Desktop/wtdc/Python_Project/rtdetr-l.pt")
+model = RTDETR("rtdetr-l.pt")
 
 def infer(img, **kwargs):
     return model.predict(img, device=DEVICE_ARG, **kwargs)
