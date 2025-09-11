@@ -1,5 +1,6 @@
 
 <img width="600" alt="Image" src="https://github.com/user-attachments/assets/8d8920e4-aa4b-4c25-9046-c3aa9a5f6cf7" />
+
 # 관심영역 기반 위험 예측 관제 시스템 개발
 
 ## 프로젝트 진행 프로세스
