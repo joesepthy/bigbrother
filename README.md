@@ -21,7 +21,7 @@
 
 ## 타임 테이블
 [타임테이블](https://www.notion.so/2683c414e0cc802f80ebcb913700dbee?v=2683c414e0cc802da810000c5abdc096&source)
-
+<img width="960" height="1482" alt="Image" src="https://github.com/user-attachments/assets/eb7b2e1f-28da-4528-8005-50b17e7ffdaa" />
 ## 프로젝트 일정 수립
 | 날짜 | 내용 |
 |--|--|
