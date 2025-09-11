@@ -71,6 +71,9 @@
   
 ## 환경 셋팅
 ```
+requirments.txt
+![Uploading image.png…]()
+
 
 ```
 
