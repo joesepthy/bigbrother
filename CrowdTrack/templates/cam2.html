@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAM2 - 속도 감지 및 이벤트 모니터링</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cam.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 CAM2 - 속도 감지 및 이벤트 모니터링</h1>
+        <div class="header-info">
+            <span><span class="status-indicator"></span>YOLO 트래킹 활성</span>
+            <span class="timestamp" id="current-time">--</span>
+            <a href="/" style="color: #00ff88; text-decoration: none; padding: 5px 10px; border: 1px solid #00ff88; border-radius: 4px;">← 메인</a>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="camera-section">
+            <div class="main-camera-panel">
+                <div class="main-camera-header">
+                    <span id="current-camera-title">📹 CAM2 - 속도 감지 모드</span>
+                    <div class="frame-info">실시간 트래킹 중</div>
+                </div>
+                <div class="main-camera-feed">
+                    <div class="video-wrapper">
+                        <img src="/cam2/camera/2" class="camera-video" id="main-video">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="stats-section">
+                <div class="stats-title">📊 실시간 이벤트 통계</div>
+                <div class="stat-item zone-stat">
+                    <span>⚡ 총 이벤트 수</span>
+                    <span class="stat-value" id="total-events">0건</span>
+                </div>
+                <div class="stat-item zone-stat">
+                    <span>🏃 속도 임계값</span>
+                    <span class="stat-value">2.0 m/s</span>
+                </div>
+                {#
+                <div class="stat-item zone-stat">
+                    <span>👥 현재 추적 중</span>
+                    <span class="stat-value" id="tracking-count">0명</span>
+                </div>
+                #}
+                <div class="stat-item total-stat">
+                    <span>📈 활성 구역</span>
+                    <span class="stat-value">RUNNING ZONE</span>
+                </div>
+            </div>
+
+            <div class="alert-section">
+                <div class="alert-title">⚠️ 실시간 이벤트</div>
+                <div id="alerts-container">
+                    <div class="alert-item">시스템 대기중...</div>
+                </div>
+            </div>
+            
+            <div class="zone-info">
+                <div class="stats-title">ℹ️ 시스템 정보</div>
+                <div class="info-box">
+                    <strong>속도 감지 구역:</strong><br>
+                    화면 중앙의 노란색 경계선 내부에서 사람의 움직임을 추적하여 속도를 측정합니다.
+                </div>
+                <div class="hotkey-info">
+                    <strong>단축키:</strong> <span class="kbd">R</span> 키를 눌러 ROI 설정 팝업을 열 수 있습니다.
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='cam2.js') }}"></script>
+</body>
+</html>

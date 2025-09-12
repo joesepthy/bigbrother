@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Monitoring System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Camera Monitoring System</h1>
+        <p>모니터링할 카메라를 선택하세요</p>
+        
+        <div class="button-container">
+            <a href="/cam1/" class="cam-button cam1-button">CAM1 보기</a>
+            <a href="/cam2/" class="cam-button cam2-button">CAM2 보기</a>
+        </div>
+        
+        <div class="description">
+            <p>CAM1: 실시간 객체 탐지 및 구역 모니터링</p>
+            <p>CAM2: 속도 감지 및 이벤트 모니터링</p>
+        </div>
+    </div>
+</body>
+</html>

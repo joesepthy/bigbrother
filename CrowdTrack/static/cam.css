@@ -1,0 +1,407 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0c1421, #1a2332);
+    color: #00ff88;
+    overflow: hidden;
+    height: 100vh;
+}
+.header {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px;
+    border-bottom: 2px solid #00ff88;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header h1 { font-size: 1.5rem; text-shadow: 0 0 10px #00ff88; }
+.header-info { display: flex; gap: 20px; font-size: 0.9rem; }
+.status-indicator {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: #00ff88; margin-right: 5px; animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.main-container { display: flex; height: calc(100vh - 60px); }
+.camera-section { flex: 1; display: flex; flex-direction: column; padding: 10px; }
+.camera-tabs { display: flex; gap: 5px; margin-bottom: 10px; }
+.camera-tab {
+    padding: 8px 16px; background: rgba(0, 20, 40, 0.8);
+    border: 2px solid #555; border-radius: 8px 8px 0 0;
+    color: #999; cursor: pointer; transition: all 0.3s;
+    font-weight: bold; font-size: 0.9rem;
+}
+.camera-tab.active {
+    background: rgba(0, 255, 136, 0.2); border-color: #00ff88; color: #00ff88;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+.camera-tab:hover { border-color: #00ff88; color: #00ff88; }
+.main-camera-panel {
+    background: rgba(0, 20, 40, 0.8); border: 2px solid #00ff88;
+    border-radius: 0 8px 8px 8px; position: relative; overflow: hidden;
+    flex: 1; display: flex; flex-direction: column;
+}
+.main-camera-header {
+    background: rgba(0, 255, 136, 0.2); padding: 12px 15px;
+    font-size: 1.1rem; font-weight: bold; border-bottom: 1px solid #00ff88;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.main-camera-feed {
+    flex: 1; background: #000; display: flex; align-items: center;
+    justify-content: center; font-size: 1.5rem; color: #666;
+    position: relative; min-height: 400px;
+    padding: 5px;
+}
+.camera-offline { color: #ff4444; }
+.frame-info {
+    font-size: 0.9rem; background: rgba(0, 0, 0, 0.7);
+    padding: 4px 8px; border-radius: 3px;
+}
+
+/* 🔥 영상 및 클릭 가능한 구역 스타일 */
+.camera-video {
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 80%;
+    min-height: 80%;
+    object-fit: contain;
+    border-radius: 4px;
+    background-color: #000;
+}
+.video-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #000;
+    min-height: 300px;
+    position: relative;
+}
+
+/* 🔥 클릭 가능한 구역 오버레이 */
+.zone-overlay {
+    position: absolute;
+    background: rgba(0, 255, 136, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    opacity: 0.7;
+}
+
+.zone-overlay:hover {
+    background: rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.8);
+    transform: scale(1.02);
+}
+
+.zone-label {
+    position: absolute;
+    top: -25px;
+    left: 5px;
+    background: rgba(0, 255, 136, 0.9);
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* 🔥 팝업 모달 스타일 */
+.popup-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+.popup-content {
+    background: rgba(0, 30, 60, 0.95);
+    border: 3px solid #00ff88;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 80%;
+    max-height: 80%;
+    position: fixed;
+    top: 15%;
+    left: 5%;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+}
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #00ff88;
+}
+.popup-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #00ff88;
+    text-shadow: 0 0 5px #00ff88;
+}
+.close-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.close-btn:hover {
+    background: #ff6666;
+    box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+.popup-video {
+    width: 600px;
+    height: 400px;
+    object-fit: contain;
+    border-radius: 5px;
+    background: #000;
+}
+
+/* 🔥 CAM2 전용 스타일 */
+.info-box {
+    background: rgba(0, 50, 100, 0.3);
+    border: 1px solid #00ff88;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    color: #ccc;
+}
+
+.hotkey-info {
+    background: rgba(50, 50, 0, 0.3);
+    border: 1px solid #ffff00;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #ffff88;
+}
+
+.kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    border: 1px solid #00ff88;
+    border-radius: 4px;
+    background: rgba(0, 255, 136, 0.2);
+    color: #00ff88;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+/* 🔥 위험 구역 자동 팝업 스타일 */
+.danger-popup-content {
+    background: rgba(30, 0, 0, 0.95);
+    border: 3px solid #ff4444;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    box-shadow: 0 0 30px rgba(255, 68, 68, 0.8);
+    animation: danger-glow 1s infinite alternate;
+}
+
+.danger-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ff4444;
+}
+
+.danger-popup-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff4444;
+    text-shadow: 0 0 10px #ff4444;
+    animation: danger-text-pulse 1s infinite;
+}
+
+.danger-zones-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.danger-zone-item {
+    background: rgba(255, 68, 68, 0.1);
+    border: 2px solid #ff4444;
+    border-radius: 8px;
+    padding: 15px;
+    min-width: 300px;
+    max-width: 400px;
+    position: relative;
+    animation: danger-zone-pulse 2s infinite;
+}
+
+.danger-zone-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.danger-zone-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff4444;
+    text-shadow: 0 0 5px #ff4444;
+}
+
+.danger-zone-count {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff6666;
+    background: rgba(255, 68, 68, 0.3);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.danger-zone-video {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 5px;
+    background: #000;
+    border: 1px solid #ff4444;
+}
+
+.danger-warning {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #ff4444;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    animation: warning-blink 0.5s infinite;
+}
+
+@keyframes danger-glow {
+    0% { box-shadow: 0 0 30px rgba(255, 68, 68, 0.8); }
+    100% { box-shadow: 0 0 50px rgba(255, 68, 68, 1); }
+}
+
+@keyframes danger-text-pulse {
+    0%, 100% { text-shadow: 0 0 10px #ff4444; }
+    50% { text-shadow: 0 0 20px #ff4444, 0 0 30px #ff4444; }
+}
+
+@keyframes danger-zone-pulse {
+    0%, 100% { 
+        box-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
+        transform: scale(1.02);
+    }
+}
+
+@keyframes warning-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.sidebar {
+    width: 350px; background: rgba(0, 30, 60, 0.9);
+    border-left: 2px solid #00ff88; padding: 20px; overflow-y: auto;
+}
+.stats-section { margin-bottom: 30px; }
+.stats-title {
+    font-size: 1.2rem; font-weight: bold; margin-bottom: 15px;
+    text-shadow: 0 0 5px #00ff88;
+}
+.stat-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px; margin: 5px 0; background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px; border-left: 3px solid #00ff88;
+    transition: all 0.3s ease;
+}
+.stat-value { font-size: 1.5rem; font-weight: bold; }
+
+/* 🔥 구역별 상태 스타일 */
+.zone-stat {
+    position: relative;
+    overflow: hidden;
+}
+.zone-stat.safe {
+    border-left-color: #00ff88;
+    background: rgba(0, 255, 136, 0.1);
+}
+.zone-stat.warning {
+    border-left-color: #ffaa00;
+    background: rgba(255, 170, 0, 0.1);
+    animation: warning-pulse 2s infinite;
+}
+.zone-stat.danger {
+    border-left-color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+    animation: danger-pulse 1s infinite;
+}
+.total-stat {
+    border-left-color: #00aaff;
+    background: rgba(0, 170, 255, 0.1);
+    font-weight: bold;
+}
+
+@keyframes warning-pulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(255, 170, 0, 0.3); }
+    50% { box-shadow: 0 0 15px rgba(255, 170, 0, 0.6); }
+}
+
+@keyframes danger-pulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(255, 68, 68, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(255, 68, 68, 0.8); }
+}
+.alert-section {
+    background: rgba(255, 68, 68, 0.1); border: 1px solid #ff4444;
+    border-radius: 8px; padding: 15px; margin: 15px 0;
+}
+.alert-title { color: #ff4444; font-weight: bold; margin-bottom: 10px; }
+.alert-item {
+    background: rgba(255, 68, 68, 0.2); padding: 8px; margin: 5px 0;
+    border-radius: 4px; font-size: 0.9rem;
+}
+.camera-controls {
+    margin-top: 20px; padding: 15px; background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+.control-button {
+    background: rgba(0, 255, 136, 0.2); border: 1px solid #00ff88;
+    color: #00ff88; padding: 8px 15px; margin: 5px; border-radius: 4px;
+    cursor: pointer; transition: all 0.3s;
+}
+.control-button:hover {
+    background: rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+.timestamp { font-size: 0.8rem; opacity: 0.7; }
+
+/* 🔥 구역 설명 패널 */
+.zone-info {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border-left: 3px solid #00ff88;
+}
